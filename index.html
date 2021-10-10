@@ -15,6 +15,20 @@
 
 <body>
     <main>
+        <!--Loading animation-->
+        <section id="loading_animation">
+            <div class="book">
+                <span class="page turn"></span>
+                <span class="page turn">Please</span>
+                <span class="page turn">Wait</span>
+                <span class="page turn">While</span>
+                <span class="page turn"></span>
+                <span class="page turn">We Load...</span>
+                <span class="cover"></span>
+                <span class="page"></span>
+                <span class="cover turn"></span>
+            </div>
+        </section>
         <section>
             <h1 id="site_name"><i class="bi bi-file-earmark-word-fill"></i>&nbsp WORDICTIONARY</h1>
         </section>
@@ -43,19 +57,22 @@
 
                 <button type="button" class="btn btn-outline-danger" id="reset_btn">Reset</button>
             </div> <br><br>
-            <div id="word_resukt_div">
+            <div id="word_result_div">
                 <!--if no word searched-->
-                <div class="toast" id="liveToast" role="alert" aria-live="assertive" aria-atomic="true">
-                    <div class="toast-header">
-                        <i class="bi bi-file-earmark-word-fill"></i>&nbsp&nbsp
-                        <strong class="me-auto">WORDICTIONARY</strong>
-                        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-                    </div>
-                    <div class="toast-body">
-                        Please type a word to searched...
+                <div aria-live="polite" aria-atomic="true" class="bg-dark position-relative bd-example-toasts">
+                    <div class="toast-container position-fixed bottom-0 end-0 p-3 " id="toastPlacement">
+                        <div class="toast" id="liveToast">
+                            <div class="toast-header">
+                                <i class="bi bi-file-earmark-word-fill"></i>&nbsp&nbsp
+                                <strong class="me-auto">WORDICTIONARY</strong>
+
+                            </div>
+                            <div class="toast-body">
+                                <b>NOTE:</b> <i>Please type a word to searched...</i>
+                            </div>
+                        </div>
                     </div>
                 </div>
-
                 <!--card to be displayed if  a word is given in input-->
                 <div class="card" id="show_result" style="width: 25rem;">
                     <div class="card-body">
@@ -115,6 +132,9 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
     integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
     crossorigin="anonymous"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.js"></script>
 <script src="script.js"></script>
 
 </html>

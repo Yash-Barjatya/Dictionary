@@ -1,4 +1,13 @@
 console.log("connected")
+let loading_animation = document.getElementById('loading_animation');
+/*
+$(window).load(function () {
+    // Animate loader off screen
+    $("#loading_animation").fadeOut("slow");;
+});*/
+$(window).on('load', function () {
+    $('#loading_animation').hide();
+})
 displayquote();
 /**********FETCH API************/
 
@@ -24,7 +33,10 @@ async function displayquote() {
 
     }
 }
-// API for WORD
+
+
+
+
 let search_word = document.getElementById('search_word');
 let card_title = document.getElementById('card_title');
 let word_meaning = document.getElementById('word_meaning');
@@ -35,28 +47,35 @@ let word_audio = document.getElementById('word_audio');
 let audio_btn = document.getElementById('audio_btn');
 let search_btn = document.getElementById('search_btn');
 
+let word_result_div = document.getElementById('word_result_div');
 
 search_btn.addEventListener('click', function () {
     let show_result = document.getElementById('show_result');
+    show_result.style.display = "none";
     if (search_word.value == "") {
         show_result.style.display = "none";
         var toastLiveExample = document.getElementById('liveToast')
         var toast = new bootstrap.Toast(toastLiveExample);
         toast.show()
-
-
     }
-
     else {
-
-        show_result.style.display = "block";
         displayWord();
+        loading_animation.style.display = "block";
+        setTimeout(function () {
+            loading_animation.style.display = "none";
+        }, 2990)
+        setTimeout(function () {
+            show_result.style.display = "block";
+        }, 3000)
+
+
     }
 
 })
 reset_btn.addEventListener('click', function () {
     search_word.value = "";
 })
+// API for WORD
 async function displayWord() {
     console.log('call received for displayWord function')
     const response = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${search_word.value}`)
