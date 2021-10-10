@@ -37,9 +37,22 @@ let search_btn = document.getElementById('search_btn');
 
 
 search_btn.addEventListener('click', function () {
-    console.log('seach_btn clicked')
+    let show_result = document.getElementById('show_result');
+    if (search_word.value == "") {
+        show_result.style.display = "none";
+        var toastLiveExample = document.getElementById('liveToast')
+        var toast = new bootstrap.Toast(toastLiveExample);
+        toast.show()
 
-    displayWord();
+
+    }
+
+    else {
+
+        show_result.style.display = "block";
+        displayWord();
+    }
+
 })
 reset_btn.addEventListener('click', function () {
     search_word.value = "";
@@ -54,9 +67,7 @@ async function displayWord() {
         word_meaning.innerHTML = `<br>  <b><i>Meaning: </i></b>  ${data[0].meanings[0].definitions[0].definition} `
         word_example.innerHTML = `<b><i>Example: </i></b>   ${data[0].meanings[0].definitions[0].example} `
         word_audio_source.src = `${data[0].phonetics[0].audio}`
-        word_pronounciation.innerHTML = `<b><i>Pronounciation:</i></b>  ${data[0].phonetics[0].text} &nbsp
-        &nbsp&nbsp
-        &nbsp`
+        word_pronounciation.innerHTML = `<b><i>Pronounciation:</i></b>  ${data[0].phonetics[0].text}  `
     }
 }
 //word_audio

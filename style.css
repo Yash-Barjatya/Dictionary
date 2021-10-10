@@ -42,6 +42,7 @@ font-weight: bold;
 }
 #show_result{
     background-color: gold;
+    display: none;
     
 }
 #bookmark_btn{

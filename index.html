@@ -16,7 +16,7 @@
 <body>
     <main>
         <section>
-            <h1 id="site_name">WORDICTIONARY</h1>
+            <h1 id="site_name"><i class="bi bi-file-earmark-word-fill"></i>&nbsp WORDICTIONARY</h1>
         </section>
         <br><br>
         <!---QUOTE -->
@@ -42,34 +42,47 @@
                 <button type="button" class="btn btn-outline-success" id="search_btn">Search</button>
 
                 <button type="button" class="btn btn-outline-danger" id="reset_btn">Reset</button>
-            </div>
-            <div id="notes" class="row container-fluid">
-            </div>
-            <br><br>
-            <div class="card" id="show_result" style="width: 18rem;">
-                <div class="card-body">
-                    <button type="button" id="bookmark_btn"><i class="bi bi-bookmark"></i></button>
-                    <h5 class="card-title" id="card_title">Word searched</h5><br>
+            </div> <br><br>
+            <div id="word_resukt_div">
+                <!--if no word searched-->
+                <div class="toast" id="liveToast" role="alert" aria-live="assertive" aria-atomic="true">
+                    <div class="toast-header">
+                        <i class="bi bi-file-earmark-word-fill"></i>&nbsp&nbsp
+                        <strong class="me-auto">WORDICTIONARY</strong>
+                        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                    <div class="toast-body">
+                        Please type a word to searched...
+                    </div>
+                </div>
+
+                <!--card to be displayed if  a word is given in input-->
+                <div class="card" id="show_result" style="width: 25rem;">
+                    <div class="card-body">
+                        <button type="button" id="bookmark_btn"><i class="bi bi-bookmark"></i></button>
+                        <h5 class="card-title" id="card_title">Word searched</h5><br>
 
 
-                    <span class="card-text" id="word_pronounciation" title="phonetics:text">Word pronounciation &nbsp
-                        &nbsp
-                        &nbsp
-                        &nbsp
-                        &nbsp
-                        &nbsp
-                        &nbsp
-                    </span>
-                    <button type="button" id="audio_btn" title="phonetics:audio"><i class="bi bi-volume-down"><audio
-                                id="word_audio">
-                                <source src="" id="word_audio_source" type="audio/ogg">
-                                <source src="" id="word_audio_source" type="audio/mpeg">
-                                Your browser does not support the audio element.
-                            </audio></i></button><br>
+                        <span class="card-text" id="word_pronounciation" title="phonetics:text">Word pronounciation
+                            &nbsp
+                            &nbsp
+                            &nbsp
+                            &nbsp
+                            &nbsp
+                            &nbsp
+                            &nbsp
+                        </span>
+                        <button type="button" id="audio_btn" title="phonetics:audio"><i class="bi bi-volume-down"><audio
+                                    id="word_audio">
+                                    <source src="" id="word_audio_source" type="audio/ogg">
+                                    <source src="" id="word_audio_source" type="audio/mpeg">
+                                    Your browser does not support the audio element.
+                                </audio></i></button><br>
 
-                    <p class="card-text" id="word_meaning">Word meaning<br></p>
-                    <p class="card-text" id="word_example">word_example</p><br>
+                        <p class="card-text" id="word_meaning">Word meaning<br></p>
+                        <p class="card-text" id="word_example">word_example</p><br>
 
+                    </div>
                 </div>
             </div>
         </section>
