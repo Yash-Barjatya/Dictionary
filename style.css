@@ -1,0 +1,65 @@
+body{
+    background-color: black;
+}
+
+#site_name{
+    margin-top: 10px;
+text-align: center;
+font-size: 50px;
+color: #f5e96b;
+
+}
+hr:not([size]) {
+    color: #c9b068;
+    color: #9e7333;
+    height: 10px;
+}
+.quote_box{
+text-align: center;
+color: goldenrod;
+background-color: black;
+}
+#quote{
+    font-weight: bolder;
+    font-style: italic;
+    font-size: 18px;
+}
+#author{
+margin-right: 2%;
+font-size: 15px;
+font-weight: bold;
+    font-style: italic; 
+}
+#search_word{
+    background-color:black;
+    color: gold;
+
+    
+}
+#search_word:focus{
+ 
+    border: 1px solid black;
+}
+#show_result{
+    background-color: gold;
+    
+}
+#bookmark_btn{
+    float: right;
+    background-color: gold;
+    color: black;
+    border: 2px solid gold;
+}
+#card_title{
+font-size: 20px;
+text-transform: capitalize;
+font-weight: bolder;
+}
+#audio_btn{
+    background-color: gold;
+    color: black;
+    border: 2px solid gold;
+    
+  
+}
+

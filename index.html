@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dictionary</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+
+    <link rel=stylesheet href="style.css">
+</head>
+
+<body>
+    <main>
+        <section>
+            <h1 id="site_name">WORDICTIONARY</h1>
+        </section>
+        <br><br>
+        <!---QUOTE -->
+        <section>
+
+            <div class=" card quote_box ">
+                <div class=" card_body">
+
+                    <blockquote class="blockquote mb-0">
+                        <p id="quote">Loading quote.</p>
+                        <cite id="author" title="Source Title">Server</cite>
+                    </blockquote>
+                </div>
+            </div>
+
+        </section>
+        <br><br>
+        <!---WORD SEARCH-->
+        <section>
+            <div class="hstack gap-3">
+                <input class="form-control me-auto" id="search_word" type="text" placeholder="Search your word here..."
+                    aria-label="Add your item here...">
+                <button type="button" class="btn btn-outline-success" id="search_btn">Search</button>
+
+                <button type="button" class="btn btn-outline-danger" id="reset_btn">Reset</button>
+            </div>
+            <div id="notes" class="row container-fluid">
+            </div>
+            <br><br>
+            <div class="card" id="show_result" style="width: 18rem;">
+                <div class="card-body">
+                    <button type="button" id="bookmark_btn"><i class="bi bi-bookmark"></i></button>
+                    <h5 class="card-title" id="card_title">Word searched</h5><br>
+
+
+                    <span class="card-text" id="word_pronounciation" title="phonetics:text">Word pronounciation &nbsp
+                        &nbsp
+                        &nbsp
+                        &nbsp
+                        &nbsp
+                        &nbsp
+                        &nbsp
+                    </span>
+                    <button type="button" id="audio_btn" title="phonetics:audio"><i class="bi bi-volume-down"><audio
+                                id="word_audio">
+                                <source src="" id="word_audio_source" type="audio/ogg">
+                                <source src="" id="word_audio_source" type="audio/mpeg">
+                                Your browser does not support the audio element.
+                            </audio></i></button><br>
+
+                    <p class="card-text" id="word_meaning">Word meaning<br></p>
+                    <p class="card-text" id="word_example">word_example</p><br>
+
+                </div>
+            </div>
+        </section>
+        <br><br>
+        <!--
+        <section>
+            <h1>RECENTLY SEARCHED</h1>
+            <div id="recently_searched" class="row container-fluid">
+                 <div class="card-body">
+                    <h5 class="card-title">Word searched</h5>
+
+                    <p class="card-text"><i class="bi bi-volume-down"></i> Word pronounciation</p>
+                    <p class="card-text">Word meaning.</p>
+                    <a href="#" class="btn btn-primary">Bookmark</a>
+                </div>
+            </div>
+        </section>
+        -->
+    </main>
+    <footer>
+
+    </footer>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
+    integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
+    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
+    integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
+    crossorigin="anonymous"></script>
+<script src="script.js"></script>
+
+</html>
