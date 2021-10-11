@@ -1,4 +1,5 @@
 console.log("connected")
+displayRecentWord();
 let loading_animation = document.getElementById('loading_animation');
 /*
 $(window).load(function () {
@@ -34,9 +35,17 @@ async function displayquote() {
     }
 }
 
+/**RESIZING INPUT TEXTAREA */
 
+/*
+var input = document.querySelector('input'); // get the input element
+input.addEventListener('input', resizeInput); // bind the "resizeInput" callback on "input" event
+resizeInput.call(input); // immediately call the function
 
-
+function resizeInput() {
+    this.style.width = this.value.length + "30ch";
+}*/
+/********** *****/
 let search_word = document.getElementById('search_word');
 let card_title = document.getElementById('card_title');
 let word_meaning = document.getElementById('word_meaning');
@@ -59,7 +68,7 @@ search_btn.addEventListener('click', function () {
         toast.show()
     }
     else {
-        displayWord();
+        fetchWord();
         loading_animation.style.display = "block";
         setTimeout(function () {
             loading_animation.style.display = "none";
@@ -70,14 +79,28 @@ search_btn.addEventListener('click', function () {
 
 
     }
-
+    let recently_searched = localStorage.getItem("recently_searched");
+    if (recently_searched == null) {
+        recentWord = [];
+    } else {
+        recentWord = JSON.parse(recently_searched);
+    }
+    let my_word = {
+        word: search_word.value,
+    }
+    console.log(my_word);
+    recentWord.push(my_word);
+    console.log(recently_searched);
+    localStorage.setItem("recently_searched", JSON.stringify(recentWord));
+    displayRecentWord();
 })
 reset_btn.addEventListener('click', function () {
     search_word.value = "";
+    show_result.style.display = "none";
 })
 // API for WORD
-async function displayWord() {
-    console.log('call received for displayWord function')
+async function fetchWord() {
+    //console.log('call received for fetchWord function')
     const response = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${search_word.value}`)
     console.log(`https://api.dictionaryapi.dev/api/v2/entries/en/${search_word.value}`)
     const data = await response.json();
@@ -95,12 +118,41 @@ audio_btn.addEventListener('click', function (e) {
     audio_btn.getElementsByTagName("i")[0].className = "bi bi-volume-down-fill";
     word_audio.load(); //call this to just preload the audio without playing
     word_audio.play();
-    word_audio.onended() = function () {
+    word_audio.addEventListener('ended', function () {
+
         audio_btn.getElementsByTagName("i")[0].className = "bi bi-volume-down";
-    }
+        console.log(audio_btn.getElementsByTagName("i")[0].className)
+
+    })
 
 
 })
+//Recently searched
+function displayRecentWord() {
+    console.log('displayRecentWord() called');
+    let recently_searched = localStorage.getItem("recently_searched ");
+    if (recently_searched == null) {
+        recentWord = [];
+    } else {
+        recentWord = JSON.parse(recently_searched);
+    }
+    let html = "";
+    recentWord.forEach(function (element, index) {
+        html += `<div class="recent_word my-2 mx-2 card" style="width: 20rem;">
+        <div class="card-body">
+            <h5 class="card-title" id=${index}>${element.word}</h5>
+            </div>
+    </div>`
+
+    });
+    let recently_searched_element = document.getElementById('recently_searched')
+    if (recentWord.length != 0) {
+        recently_searched_element.innerHTML = html;
+        index++;
+    }
+    console.log(recentWord);
+}
+
 //bookmark
 let bookmark_btn = document.getElementById('bookmark_btn')
 bookmark_btn.addEventListener('click', function () {
@@ -117,3 +169,33 @@ bookmark_btn.addEventListener('click', function () {
     }
 
 })
+
+/**
+ * Back to top button
+ */
+
+//Get the button
+let mybutton = document.getElementById("btn-back-to-top");
+
+// When the user scrolls down 20px from the top of the document, show the button
+window.onscroll = function () {
+    scrollFunction();
+};
+
+function scrollFunction() {
+    if (
+        document.body.scrollTop > 20 ||
+        document.documentElement.scrollTop > 20
+    ) {
+        mybutton.style.display = "block";
+    } else {
+        mybutton.style.display = "none";
+    }
+}
+// When the user clicks on the button, scroll to the top of the document
+mybutton.addEventListener("click", backToTop);
+
+function backToTop() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+}
