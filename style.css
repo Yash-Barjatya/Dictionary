@@ -59,6 +59,9 @@ font-weight: bold;
     background-color: gold;
     display: none;
     
+}#recent_search_title{
+  color: gold;
+  display: none;
 }
 #bookmark_btn{
     float: right;

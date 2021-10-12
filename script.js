@@ -1,5 +1,5 @@
-console.log("connected")
-displayRecentWord();
+//console.log("connected")
+
 let loading_animation = document.getElementById('loading_animation');
 /*
 $(window).load(function () {
@@ -9,6 +9,7 @@ $(window).load(function () {
 $(window).on('load', function () {
     $('#loading_animation').hide();
 })
+displayRecentWord();
 displayquote();
 /**********FETCH API************/
 
@@ -84,15 +85,17 @@ search_btn.addEventListener('click', function () {
         recentWord = [];
     } else {
         recentWord = JSON.parse(recently_searched);
+
     }
-    let my_word = {
-        word: search_word.value,
+
+    if (search_word.value != "") {
+        recentWord.push(search_word.value);
+        localStorage.setItem("recently_searched", JSON.stringify(recentWord));
+        displayRecentWord();
     }
-    console.log(my_word);
-    recentWord.push(my_word);
-    console.log(recently_searched);
-    localStorage.setItem("recently_searched", JSON.stringify(recentWord));
-    displayRecentWord();
+
+
+
 })
 reset_btn.addEventListener('click', function () {
     search_word.value = "";
@@ -102,14 +105,27 @@ reset_btn.addEventListener('click', function () {
 async function fetchWord() {
     //console.log('call received for fetchWord function')
     const response = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${search_word.value}`)
-    console.log(`https://api.dictionaryapi.dev/api/v2/entries/en/${search_word.value}`)
+    //console.log(`https://api.dictionaryapi.dev/api/v2/entries/en/${search_word.value}`)
     const data = await response.json();
     if (response.ok) {
+        audio_btn.style.display = "block";
+        bookmark_btn.style.display = "block";
+
         card_title.innerHTML = `${data[0].word}`
         word_meaning.innerHTML = `<br>  <b><i>Meaning: </i></b>  ${data[0].meanings[0].definitions[0].definition} `
         word_example.innerHTML = `<b><i>Example: </i></b>   ${data[0].meanings[0].definitions[0].example} `
         word_audio_source.src = `${data[0].phonetics[0].audio}`
         word_pronounciation.innerHTML = `<b><i>Pronounciation:</i></b>  ${data[0].phonetics[0].text}  `
+
+    }
+    else {
+        card_title.innerHTML = `${data.title}`
+        word_meaning.innerHTML = `${data.message}`
+        word_example.innerHTML = `${data.resolution}`
+        word_pronounciation.innerHTML = "";
+        audio_btn.style.display = "none";
+        bookmark_btn.style.display = "none";
+
     }
 }
 //word_audio
@@ -123,36 +139,60 @@ audio_btn.addEventListener('click', function (e) {
         audio_btn.getElementsByTagName("i")[0].className = "bi bi-volume-down";
         console.log(audio_btn.getElementsByTagName("i")[0].className)
 
+
     })
 
 
 })
 //Recently searched
 function displayRecentWord() {
-    console.log('displayRecentWord() called');
-    let recently_searched = localStorage.getItem("recently_searched ");
+    // console.log('displayRecentWord() called ');
+    let recently_searched = localStorage.getItem("recently_searched");
     if (recently_searched == null) {
+        // console.log("recentWord was null")
+        recentWord = [];
+    } else {
+        recentWord = JSON.parse(recently_searched);
+        // console.log("recentWord was not null")
+    }
+    let html = "";
+    recentWord.forEach(function (element, index) {
+        // console.log("entered recentWord loop  fnc")
+        html += `<div class="recent_word my-2 mx-2 card" style="width: 20rem;">
+        <div class="card-body">
+            <h5 class="card-title">${element}</h5>
+            </div>
+    </div>`;
+        deleteRecentSearch(index);
+        //console.log(html);
+    });
+    let recently_searched_element = document.getElementById('recently_searched')
+    let recent_search_title = document.getElementById("recent_search_title");
+    if (recentWord.length != 0) {
+        recent_search_title.style.display = "block"
+        recently_searched_element.innerHTML = html;
+    }
+
+}
+function deleteRecentSearch(index) {
+    //console.log(`index ${index} given`)
+    let recently_searched = localStorage.getItem("recently_searched");
+    if (recently_searched == null) {
+
         recentWord = [];
     } else {
         recentWord = JSON.parse(recently_searched);
     }
-    let html = "";
-    recentWord.forEach(function (element, index) {
-        html += `<div class="recent_word my-2 mx-2 card" style="width: 20rem;">
-        <div class="card-body">
-            <h5 class="card-title" id=${index}>${element.word}</h5>
-            </div>
-    </div>`
+    if (index == 4) {
+        //console.log(`index ${index} therefore entered splice function part;expected index =4`)
+        recentWord.splice(0, 1);
+        //index = 0;
+        localStorage.setItem("recently_searched", JSON.stringify(recentWord));
+        displayRecentWord();
 
-    });
-    let recently_searched_element = document.getElementById('recently_searched')
-    if (recentWord.length != 0) {
-        recently_searched_element.innerHTML = html;
-        index++;
     }
-    console.log(recentWord);
+    // console.log(`index:${index} before leaving  delete fnc`)
 }
-
 //bookmark
 let bookmark_btn = document.getElementById('bookmark_btn')
 bookmark_btn.addEventListener('click', function () {
