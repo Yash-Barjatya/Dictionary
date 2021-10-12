@@ -24,9 +24,11 @@ hr:not([size]) {
 #bookmark_btn{
 font-size: larger;
 color: black;
+
 }
 #offcanvasRight{
   background-color: yellow;
+  height: fit-content;
 }
 #offcanvasRightLabel{
   font-family: "Audiowide", sans-serif;
@@ -34,6 +36,10 @@ color: black;
 }
 #bookmarked_words_element{
   font-family: 'Architects Daughter';
+  text-transform: uppercase; 
+}
+#bookmarked_words_element button{
+  float: right;
 }
 .quote_box{
 text-align: center;
@@ -109,6 +115,20 @@ font-weight: bolder;
    background-color: black;
    color: goldenrod;
    border: 2px solid yellow;
+}
+#recent_popover{
+  background-color: black;
+  color: goldenrod;
+}
+.popover{
+  background: gold;
+  font-weight: 700;
+  font-size: large;
+}
+#recent_search_title{
+  margin-left: 33%;
+  font-family: 'Architects Daughter', sans-serif;
+  font-family: "Audiowide", sans-serif;
 }
 /***loading animation**/
 
@@ -303,4 +323,5 @@ justify-content: space-around;
   background-color:black ;
   border-color: black;
 }
+
 

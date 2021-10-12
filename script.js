@@ -63,7 +63,7 @@ let word_history_section = document.getElementById('word_history_section');
 
 let word_result_div = document.getElementById('word_result_div');
 
-search_btn.addEventListener('click', function () {
+search_btn.addEventListener('click', async function () {
     bookmark_icon.getElementsByTagName("i")[0].className = "bi bi-bookmark";
     let show_result = document.getElementById('show_result');
     show_result.style.display = "none";
@@ -96,9 +96,16 @@ search_btn.addEventListener('click', function () {
         recentWord = JSON.parse(recently_searched);
 
     }
+    const response = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${search_word.value}`)
+    const data = await response.json();
+
+    let recentObj = {
+        title: `${data[0].word}`,
+        meaning: `${data[0].meanings[0].definitions[0].definition}`,
+    }
 
     if (search_word.value != "") {
-        recentWord.push(search_word.value);
+        recentWord.push(recentObj);
         localStorage.setItem("recently_searched", JSON.stringify(recentWord));
         displayRecentWord();
     }
@@ -167,7 +174,9 @@ function displayRecentWord() {
         // console.log("entered recentWord loop  fnc")
         html += `<div class="recent_word my-2 mx-2 card" style="width: 20rem;">
         <div class="card-body">
-            <h5 class="card-title">${element}</h5>
+           <button id ="recent_popover" type="button" class="btn " data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="bottom" title="${element.title}"
+            data-bs-content="${element.meaning}"> <h5 class="card-title">${element.title}</h5>
+        </button>
             </div>
     </div>`;
         deleteRecentSearch(index);
@@ -246,8 +255,8 @@ function displaybookmarkedWord() {
     let html = "";
     bookmarkedObj.forEach(function (element, index) {
         // console.log("entered recentWord loop  fnc")
-        html += `<li id=${index}><h5>${element}<button id=${index} type="button" class="btn-close text-reset"
-        aria-label="Close" onclick="delete_bookmarkWord(this.id)"></button></h5></li>`;
+        html += `<li id=${index}><h4>${element}<button id=${index} type="button" class="btn-close text-reset"
+        aria-label="Close" onclick="delete_bookmarkWord(this.id)"></button></h4></li><br>`;
         console.log(`index :${index} passed to delete function`)
     });
     let bookmarked_words_element = document.getElementById('bookmarked_words_element')
@@ -274,6 +283,14 @@ function delete_bookmarkWord(index) {
     localStorage.setItem("bookmarked_words", JSON.stringify(bookmarkedObj));
     displaybookmarkedWord();
 }
+
+
+/// popovser section for arecent searches 
+var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+    return new bootstrap.Popover(popoverTriggerEl)
+})
+
 /**
  * Back to top button
  */
