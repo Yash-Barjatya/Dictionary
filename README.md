@@ -11,9 +11,11 @@
 *   _JS_
                                 
 - - - -
-![image](https://user-images.githubusercontent.com/82602080/136998746-b392e009-664c-414e-bddb-63c78651f972.png)
+1. Search word and get not only the  meaning of the word but also learn about its phonetic.
+![Screenshot (1318)](https://user-images.githubusercontent.com/82602080/136999293-05da6fd4-8f27-4a9b-83a6-b518341ec599.png)
 
 - - - -
+
 Hope you like it !!
 
 _Note_ : For best experience view in desktop or laptop.
