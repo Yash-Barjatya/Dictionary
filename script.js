@@ -56,6 +56,7 @@ let word_audio_source = document.getElementById('word_audio_source');
 let word_audio = document.getElementById('word_audio');
 let audio_btn = document.getElementById('audio_btn');
 let search_btn = document.getElementById('search_btn');
+let word_history_section = document.getElementById('word_history_section');
 
 let word_result_div = document.getElementById('word_result_div');
 
@@ -70,13 +71,17 @@ search_btn.addEventListener('click', function () {
     }
     else {
         fetchWord();
+        word_history_section.style.display = "none";
         loading_animation.style.display = "block";
+
         setTimeout(function () {
             loading_animation.style.display = "none";
-        }, 2990)
+            word_history_section.style.display = "block";
+        }, 0990)
         setTimeout(function () {
             show_result.style.display = "block";
-        }, 3000)
+
+        }, 1000)
 
 
     }
@@ -88,7 +93,7 @@ search_btn.addEventListener('click', function () {
 
     }
 
-    if (search_word.value != "") {
+    if (search_word.value != "" || rece) {
         recentWord.push(search_word.value);
         localStorage.setItem("recently_searched", JSON.stringify(recentWord));
         displayRecentWord();
