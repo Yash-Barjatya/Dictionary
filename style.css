@@ -8,6 +8,7 @@ body{
 text-align: center;
 font-size: 50px;
 font-family: "Audiowide", sans-serif;
+
 color: #f5e96b;
 color: #c9b068;
 
@@ -16,6 +17,23 @@ hr:not([size]) {
     color: #c9b068;
     color: #9e7333;
     height: 10px;
+}
+.navbar{
+  background-color: #FFD700;
+}
+#bookmark_btn{
+font-size: larger;
+color: black;
+}
+#offcanvasRight{
+  background-color: yellow;
+}
+#offcanvasRightLabel{
+  font-family: "Audiowide", sans-serif;
+  font-weight: bolder;
+}
+#bookmarked_words_element{
+  font-family: 'Architects Daughter';
 }
 .quote_box{
 text-align: center;
@@ -63,7 +81,7 @@ font-weight: bold;
   color: gold;
   display: none;
 }
-#bookmark_btn{
+#bookmark_icon{
     float: right;
     margin-top: -4.5%;
     background-color: gold;

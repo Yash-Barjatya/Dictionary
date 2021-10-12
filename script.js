@@ -10,6 +10,7 @@ $(window).on('load', function () {
     $('#loading_animation').hide();
 })
 displayRecentWord();
+displaybookmarkedWord();
 displayquote();
 /**********FETCH API************/
 
@@ -56,11 +57,14 @@ let word_audio_source = document.getElementById('word_audio_source');
 let word_audio = document.getElementById('word_audio');
 let audio_btn = document.getElementById('audio_btn');
 let search_btn = document.getElementById('search_btn');
+let bookmark_btn = document.getElementById('bookmark_btn');
+let offcanvasRight = document.getElementById('offcanvasRight');
 let word_history_section = document.getElementById('word_history_section');
 
 let word_result_div = document.getElementById('word_result_div');
 
 search_btn.addEventListener('click', function () {
+    bookmark_icon.getElementsByTagName("i")[0].className = "bi bi-bookmark";
     let show_result = document.getElementById('show_result');
     show_result.style.display = "none";
     if (search_word.value == "") {
@@ -84,7 +88,7 @@ search_btn.addEventListener('click', function () {
         }, 1000)
 
 
-    }
+    }/***local storage for recently searched  words  */
     let recently_searched = localStorage.getItem("recently_searched");
     if (recently_searched == null) {
         recentWord = [];
@@ -93,13 +97,11 @@ search_btn.addEventListener('click', function () {
 
     }
 
-    if (search_word.value != "" || rece) {
+    if (search_word.value != "") {
         recentWord.push(search_word.value);
         localStorage.setItem("recently_searched", JSON.stringify(recentWord));
         displayRecentWord();
     }
-
-
 
 })
 reset_btn.addEventListener('click', function () {
@@ -114,7 +116,7 @@ async function fetchWord() {
     const data = await response.json();
     if (response.ok) {
         audio_btn.style.display = "block";
-        bookmark_btn.style.display = "block";
+        bookmark_icon.style.display = "block";
 
         card_title.innerHTML = `${data[0].word}`
         word_meaning.innerHTML = `<br>  <b><i>Meaning: </i></b>  ${data[0].meanings[0].definitions[0].definition} `
@@ -129,7 +131,7 @@ async function fetchWord() {
         word_example.innerHTML = `${data.resolution}`
         word_pronounciation.innerHTML = "";
         audio_btn.style.display = "none";
-        bookmark_btn.style.display = "none";
+        bookmark_icon.style.display = "none";
 
     }
 }
@@ -199,22 +201,79 @@ function deleteRecentSearch(index) {
     // console.log(`index:${index} before leaving  delete fnc`)
 }
 //bookmark
-let bookmark_btn = document.getElementById('bookmark_btn')
-bookmark_btn.addEventListener('click', function () {
+let bookmark_icon = document.getElementById('bookmark_icon')
+bookmark_icon.addEventListener('click', function () {
 
-    let bookmark_icon = bookmark_btn.getElementsByTagName("i")[0].className
+    let bookmark_icon_class = bookmark_icon.getElementsByTagName("i")[0].className
+    /***local storage for bookmarked words  */
+    let bookmarked_words = localStorage.getItem("bookmarked_words");
+    if (bookmarked_words == null) {
+        bookmarkedObj = [];
+    } else {
+        bookmarkedObj = JSON.parse(bookmarked_words);
 
-    if (bookmark_icon == "bi bi-bookmark") {
+    }
+    if (bookmark_icon_class == "bi bi-bookmark") {
 
-        bookmark_btn.getElementsByTagName("i")[0].className = "bi bi-bookmark-check-fill";
+        bookmark_icon.getElementsByTagName("i")[0].className = "bi bi-bookmark-check-fill";
+        // to be reviewed such that if class name == icon fil then
+        let bookmark_parent = this.parentElement;
+
+        bookmarkedObj.push(bookmark_parent.getElementsByTagName("h5")[0].innerHTML);// to be changed to 
+        localStorage.setItem("bookmarked_words", JSON.stringify(bookmarkedObj));
+        displaybookmarkedWord();
 
     }
     else {
-        bookmark_btn.getElementsByTagName("i")[0].className = "bi bi-bookmark";
+        bookmark_icon.getElementsByTagName("i")[0].className = "bi bi-bookmark";
+        bookmarkedObj
+
     }
 
-})
 
+
+
+
+})
+function displaybookmarkedWord() {
+    let bookmarked_words = localStorage.getItem("bookmarked_words");
+    if (bookmarked_words == null) {
+        bookmarkedObj = [];
+    } else {
+        bookmarkedObj = JSON.parse(bookmarked_words);
+
+    }
+    let html = "";
+    bookmarkedObj.forEach(function (element, index) {
+        // console.log("entered recentWord loop  fnc")
+        html += `<li id=${index}><h5>${element}<button id=${index} type="button" class="btn-close text-reset"
+        aria-label="Close" onclick="delete_bookmarkWord(this.id)"></button></h5></li>`;
+        console.log(`index :${index} passed to delete function`)
+    });
+    let bookmarked_words_element = document.getElementById('bookmarked_words_element')
+    if (bookmarkedObj.length != 0) {
+
+        bookmarked_words_element.innerHTML = html;
+
+    }
+    else {
+        bookmarked_words_element.innerHTML = `<h5>No words bookmarked !!</h5>`
+    }
+}
+function delete_bookmarkWord(index) {
+    let bookmarked_words = localStorage.getItem("bookmarked_words");
+    if (bookmarked_words == null) {
+        bookmarkedObj = [];
+    } else {
+        bookmarkedObj = JSON.parse(bookmarked_words);
+
+    }
+    console.log(`index :${index} received inside delete function`)
+    bookmarkedObj.splice(index, 1);
+    console.log(`index :${index} deleted`)
+    localStorage.setItem("bookmarked_words", JSON.stringify(bookmarkedObj));
+    displaybookmarkedWord();
+}
 /**
  * Back to top button
  */
