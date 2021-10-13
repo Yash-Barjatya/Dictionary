@@ -23,7 +23,7 @@
 ![Screenshot (1319)](https://user-images.githubusercontent.com/82602080/137000102-39d25ff9-fe0b-485c-9c34-4595ef2d1f31.png)
 
 - - - -
-3. **Hover over recent searches to get a quick definiton fo the word.**
+3. **Hover over recent searches to get a quick definiton of the word.**
 
 
 ![Screenshot (1320)](https://user-images.githubusercontent.com/82602080/137000446-026f5ae9-0e7a-4822-8c0e-69d2e810c02a.png)
