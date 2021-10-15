@@ -83,9 +83,6 @@ font-weight: bold;
     background-color: gold;
     display: none;
     
-}#recent_search_title{
-  color: gold;
-  display: none;
 }
 #bookmark_icon{
     float: right;
@@ -126,6 +123,8 @@ font-weight: bolder;
   font-size: large;
 }
 #recent_search_title{
+  color: gold;
+  display: none;
   margin-left: 33%;
   font-family: 'Architects Daughter', sans-serif;
   font-family: "Audiowide", sans-serif;
@@ -171,8 +170,8 @@ font-weight: bolder;
     padding: 1rem;
     transform-origin: 100% 0;
     border-radius: 5px 0 0 5px;
-    box-shadow: inset 3px 0px 20px rgba(0, 0, 0, 0.2),
-      0px 0px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: inset 3px 0 20px rgba(0, 0, 0, 0.2),
+      0 0 15px rgba(0, 0, 0, 0.1);
     box-sizing: border-box;
   }
   .cover.turn {
@@ -252,7 +251,7 @@ font-weight: bolder;
     
   font-size: 34px;
   margin: 0 0 20px 0;
-  padding: 2px 0 2px 0;
+  padding: 2px 0 ;
   line-height: 1;
   font-family: "Audiowide", sans-serif;
   color:black;
@@ -262,7 +261,7 @@ font-weight: bolder;
 #footer .footer-top  h3 {
   font-size: 25px;
   margin: 0 0 20px 0;
-  padding: 2px 0 2px 0;
+  padding: 2px 0 ;
   line-height: 1;
   font-family: "Audiowide", sans-serif;
   color: black;
